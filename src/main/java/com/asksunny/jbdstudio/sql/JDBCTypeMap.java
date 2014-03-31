@@ -33,8 +33,10 @@ public class JDBCTypeMap {
 	
 	public static int getJDBCType(String jdbcTypeName)
 	{
-		if(instance.rtypeMap.containsKey(jdbcTypeName)){
-			return instance.rtypeMap.get(jdbcTypeName);
+		if(jdbcTypeName==null) throw new IllegalArgumentException("jdbcTypeName argument cannt be null.");
+		String key = jdbcTypeName.toUpperCase();
+		if(instance.rtypeMap.containsKey(key)){
+			return instance.rtypeMap.get(key);
 		}else{
 			return Types.OTHER;
 		}
