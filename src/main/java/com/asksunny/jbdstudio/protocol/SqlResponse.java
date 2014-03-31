@@ -3,8 +3,7 @@ package com.asksunny.jbdstudio.protocol;
 import java.util.List;
 
 /*
- * <jdbi>
- * 	<request>
+ * 	<sqlrequest>
  *   	<id>123456</id>
  *   	<printHeader>true</printHeader>
  *      <printMeta>true</printMeta>
@@ -21,11 +20,9 @@ import java.util.List;
  *      <sql><[CDATA[
  *      	SELECT * FROM TEST
  *      ]]></sql>
- * 	</request>
- * </jdbi>
+ *	</sqlrequest>
  * 
- * <jdbi>
- * 	<response>
+ * 	<sqlresponse>
  *   	<id>123456</id> *   	
  *      <resultset><[CDATA[
  *      1|Sunny|Liu
@@ -39,13 +36,27 @@ import java.util.List;
  *      1|Sunny|Liu
  *      2|John|Doe
  *       ]]></resultset>
- * 	</response>
- * </jdbi>
+ * 	</sqlresponse>
  * 
  * 
  */
 
-public class SqlResponse {
+public class SqlResponse 
+{
 	int requestId;
-	List<String> responseBody;	
+	List<String> responseBody;
+	public int getRequestId() {
+		return requestId;
+	}
+	public void setRequestId(int requestId) {
+		this.requestId = requestId;
+	}
+	public List<String> getResponseBody() {
+		return responseBody;
+	}
+	public void setResponseBody(List<String> responseBody) {
+		this.responseBody = responseBody;
+	}	
+	
+	
 }
