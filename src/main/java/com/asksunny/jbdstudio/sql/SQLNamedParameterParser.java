@@ -17,6 +17,7 @@ public class SQLNamedParameterParser
 		Matcher m = nameParamPattern.matcher(originalSql);
 		int pos = 0;
 		List<SQLParameter> params = new ArrayList<SQLParameter>();
+		
 		while(m.find()){
 			pos++;
 			SQLParameter param = new SQLParameter(m.group(1), m.group(3), m.group(6));

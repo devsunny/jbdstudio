@@ -8,6 +8,12 @@ public class PreparedSQLStatement
 	String preparedSql;
 	List<SQLParameter> params;
 	
+	
+	public boolean hasParameter()
+	{
+		return (params!=null && params.size()>0);
+	}
+	
 	public PreparedSQLStatement(String originalSql) {
 		super();
 		this.originalSql = originalSql;
