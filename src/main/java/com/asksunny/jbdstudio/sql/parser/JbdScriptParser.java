@@ -55,14 +55,5 @@ public class JbdScriptParser {
 		return buf.toString();
 	}
 
-	public static void main(String[] args) throws Exception {
-
-		String test = "SELECT *, 'my \\ntext' as \"my column\" FROM test;\n insert into my table; ";
-		JbdScriptParser reader = new JbdScriptParser(test);
-		String stmt = null;
-		while ((stmt = reader.nextStatement()) != null) {
-			System.out.println(stmt);
-		}
-	}
-
+	
 }
