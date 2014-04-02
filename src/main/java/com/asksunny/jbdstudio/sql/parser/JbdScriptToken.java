@@ -8,6 +8,7 @@ public class JbdScriptToken {
 	
 	
 	
+	
 	public JbdScriptToken(String image, int kind, int line, int column) {
 		super();
 		this.image = image;
@@ -41,6 +42,11 @@ public class JbdScriptToken {
 	}
 	public void setColumn(int column) {
 		this.column = column;
+	}
+	@Override
+	public String toString() {
+		return "JbdScriptToken [image=" + image + ", kind=" + kind + ", line="
+				+ line + ", column=" + column + "]";
 	}
 	
 	

@@ -2,7 +2,12 @@ package com.asksunny.jbdstudio.sql.parser;
 
 import java.io.StringReader;
 
+
 public class JbdScriptParser {
+	
+	
+	
+	
 	
 	public static void main(String[] args) throws Exception{
 		
@@ -11,7 +16,7 @@ public class JbdScriptParser {
 		JbdScriptLexer lexer = new JbdScriptLexer(reader);
 		JbdScriptToken t = null;
 		while((t=lexer.nextToken())!=null){
-			System.out.println(t.image);			
+			System.out.println(t.toString());			
 		}
 		reader.close();
 		

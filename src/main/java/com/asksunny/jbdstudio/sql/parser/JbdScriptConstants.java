@@ -1,5 +1,6 @@
 package com.asksunny.jbdstudio.sql.parser;
 
+
 public class JbdScriptConstants 
 {
 	public static  int PLAIN_LITERAL_TOKEN = 0;

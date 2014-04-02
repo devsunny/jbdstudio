@@ -3,6 +3,8 @@ package com.asksunny.jbdstudio.sql.parser;
 import java.io.IOException;
 import java.io.Reader;
 
+
+
 public class JbdScriptLexer 
 {
 	
@@ -25,6 +27,7 @@ public class JbdScriptLexer
 		StringBuilder buf = new StringBuilder();
 		while(r){				
 			int ci = reader.read();
+			//System.out.println(">>>>" + ci);
 			column++;
 			if(ci==-1){
 				reader.close();
@@ -34,24 +37,20 @@ public class JbdScriptLexer
 			}
 			char c = (char)ci;
 			if(c ==';'){
-				JbdScriptToken t = new JbdScriptToken();
-				t.image = ";";
-				t.kind = JbdScriptConstants.SEMICOLON;
+				JbdScriptToken t = new JbdScriptToken(";", JbdScriptConstants.SEMICOLON, line, column);
 				r = false;
 				return t;					
 			}else if(c =='"' || c =='\''){
 				readTo(c, buf);
 				r = false;
-				JbdScriptToken t = new JbdScriptToken();
-				t.image = buf.toString();
-				t.kind = (c=='"')?JbdScriptConstants.DOUBLE_QUOTE_LITERAL:JbdScriptConstants.SINGLE_QUOTE_LITERAL;
+				int k = (c=='"')?JbdScriptConstants.DOUBLE_QUOTE_LITERAL:JbdScriptConstants.SINGLE_QUOTE_LITERAL;
+				JbdScriptToken t = new JbdScriptToken(buf.toString(), k, line, column);
 				return t;
-			}else if(Character.isSpaceChar(c)){
+			}else if(Character.isWhitespace(c)){				
 				if(c=='\n'){
 					line++;
 					column=0;
-				}
-				
+				}				
 				if(buf.length()==0){
 					continue;
 				}else{
@@ -62,9 +61,7 @@ public class JbdScriptLexer
 				buf.append(c);
 			}			
 		}
-		JbdScriptToken t = new JbdScriptToken();
-		t.image = buf.toString();
-		t.kind = JbdScriptConstants.PLAIN_LITERAL_TOKEN;
+		JbdScriptToken t = new JbdScriptToken(buf.toString(), JbdScriptConstants.PLAIN_LITERAL_TOKEN, line, column);		
 		return t;
 		
 	}
