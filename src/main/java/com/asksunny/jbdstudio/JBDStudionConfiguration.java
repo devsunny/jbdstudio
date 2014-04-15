@@ -13,6 +13,10 @@ import javax.net.ssl.TrustManagerFactory;
 
 public class JBDStudionConfiguration extends HashMap<String, String> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static String PROP_SSL_KEY_FILE = "jbdstudio.ssl.keyStore";
 	public final static String PROP_SSL_KEY_PASSWORD = "jbdstudio.ssl.keyStorePassword";
 	public final static String PROP_SSL_CERT_PASSWORD = "jbdstudio.ssl.certPassword";
