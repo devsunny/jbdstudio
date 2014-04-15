@@ -1,8 +1,6 @@
 package com.asksunny.jbdstudio;
 
-public interface JBDStudioCommand 
-{
-	public void init(JBDStudioContext context);
-	
+public interface JBDStudioCommand extends JBDStudioService
+{	
 	public void execute();
 }

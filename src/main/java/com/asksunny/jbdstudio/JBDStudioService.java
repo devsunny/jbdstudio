@@ -1,6 +1,6 @@
 package com.asksunny.jbdstudio;
 
-public interface JBDService extends Runnable
-{
+public interface JBDStudioService {
+	public String getName();
 	public void init(JBDStudioContext context);
 }
