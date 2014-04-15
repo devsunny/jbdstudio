@@ -1,17 +1,21 @@
 package com.asksunny.jbdstudio;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.Security;
-import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+
+import com.asksunny.jbdstudio.util.CLIOptions;
 
 public class JBDStudionConfiguration extends HashMap<String, String> {
 
@@ -32,6 +36,35 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 	public final static String SYS_PROP_SSL_TRUST_PASSWORD = "javax.net.ssl.trustStorePassword";
 	private static final String PROTOCOL = "TLS";
 
+	public final static String PROP_JBDSTUDIO_CFG_FILE = "classpath:jbdstudio.cfg";
+	public final static String OPT_JBDSTUDIO_CFG_FILE = "cfg";
+	
+	public JBDStudionConfiguration(CLIOptions options)
+	{
+		String cfgFile = options.get(OPT_JBDSTUDIO_CFG_FILE);
+		if(cfgFile!=null){
+			cfgFile = PROP_JBDSTUDIO_CFG_FILE;
+			try{
+				InputStream in = null;
+				if(cfgFile.toUpperCase().startsWith("CLASSPATH:")){
+					 in = JBDStudionConfiguration.class.getResourceAsStream("/" + cfgFile.substring(10));					
+				}else{
+					in = new FileInputStream(cfgFile);
+				}
+				if(in!=null){
+					Properties prop = new Properties();
+					prop.load(in);
+					mergeProperties(prop);
+					in.close();					
+				}				
+			}catch(Exception ex){
+				;
+			}
+			
+		}		
+		mergeProperties(System.getProperties());
+		mergeProperties(options);
+	}
 	
 	
 	public JBDStudionConfiguration()
@@ -51,11 +84,12 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 		return optVal;
 	}
 	
-	private void mergeProperties(Properties props) {
-		Enumeration<Object> keys = props.keys();
-		while (keys.hasMoreElements()) {
-			String key = keys.nextElement().toString();
-			this.put(key, props.getProperty(key));
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void mergeProperties(Map props) {
+		Set<Object> keys = props.keySet();
+		for (Object key: keys) {			
+			Object val = props.get(key);
+			if( val!=null) this.put(key.toString(), val.toString());
 		}
 	}
 
