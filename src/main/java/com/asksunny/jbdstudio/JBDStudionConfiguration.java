@@ -78,7 +78,7 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 				ts.load(fin, trustPassword.toCharArray());
 				fin.close();
 				TrustManagerFactory tmf = TrustManagerFactory.getInstance(
-						"SunX509", "SunJSSE");
+						algorithm, "SunJSSE");
 				tmf.init(ts);
 				tms = tmf.getTrustManagers();
 			}
