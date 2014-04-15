@@ -3,7 +3,9 @@ package com.asksunny.jbdstudio;
 import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.security.Security;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Properties;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -30,6 +32,15 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 	public final static String SYS_PROP_SSL_TRUST_PASSWORD = "javax.net.ssl.trustStorePassword";
 	private static final String PROTOCOL = "TLS";
 
+	
+	
+	public JBDStudionConfiguration()
+	{
+		mergeProperties(System.getProperties());
+	}
+	
+	
+	
 	public String getOption(String... keys) {
 		String optVal = null;
 		for (String key : keys) {
@@ -39,6 +50,15 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 		}
 		return optVal;
 	}
+	
+	private void mergeProperties(Properties props) {
+		Enumeration<Object> keys = props.keys();
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement().toString();
+			this.put(key, props.getProperty(key));
+		}
+	}
+
 
 	public SSLContext getSSLContext() {
 		SSLContext sslContext = null;
