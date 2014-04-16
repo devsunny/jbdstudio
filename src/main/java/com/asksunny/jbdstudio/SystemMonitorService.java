@@ -19,14 +19,18 @@ public class SystemMonitorService
 		
 		Sigar sigar = new Sigar();
 		CpuInfo[]  infos =    sigar.getCpuInfoList();
-		for (int i = 0; i < infos.length; i++) {
-			System.out.println(infos[i].getTotalSockets());
-			System.out.println(infos[i].getTotalCores());			
-		}
-		Cpu[]  cpus = sigar.getCpuList();
+		CpuInfo cpuinfo = infos[0];		
+		
+		System.out.println(String.format("core per socket:%d", cpuinfo.getCoresPerSocket()));
+		System.out.println(String.format("total socket:%d", cpuinfo.getTotalSockets()));
+		System.out.println(String.format("total core:%d", cpuinfo.getTotalCores()));
+		Cpu[] cpus = sigar.getCpuList();
 		for (int i = 0; i < cpus.length; i++) {
-			System.out.println(cpus[i].getTotal());
+			Cpu cpu = cpus[i];
+			
 		}
+		
+		
 		
 	}
 

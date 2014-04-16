@@ -13,7 +13,7 @@ public class JBDStudioContext extends HashMap<String, Object>
 {
 
 	public final static String SUFFIX = ".class";
-	public final static String JAR_SUFFIX = ".class";
+	public final static String JAR_SUFFIX = ".jar";
 	public final static String PLUGIN_DIR = "jbdstudio.plugin.dir";
 	
 	URLClassLoader pluginClassloader = null;
