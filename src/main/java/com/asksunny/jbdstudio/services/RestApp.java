@@ -20,7 +20,6 @@ public class RestApp {
 	        server.setPort(port);
 	        server.start();
 	        System.out.println("Server listening on port "+port);
-
 	}
 
 }

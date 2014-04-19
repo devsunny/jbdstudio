@@ -17,7 +17,7 @@ import javax.net.ssl.TrustManagerFactory;
 
 import com.asksunny.jbdstudio.util.CLIOptions;
 
-public class JBDStudionConfiguration extends HashMap<String, String> {
+public class JBDStudioConfiguration extends HashMap<String, String> {
 
 	/**
 	 * 
@@ -39,15 +39,18 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 	public final static String PROP_JBDSTUDIO_CFG_FILE = "classpath:jbdstudio.cfg";
 	public final static String OPT_JBDSTUDIO_CFG_FILE = "cfg";
 	
-	public JBDStudionConfiguration(CLIOptions options)
+	CLIOptions options;
+	
+	public JBDStudioConfiguration(CLIOptions options)
 	{
+		this.options = options;
 		String cfgFile = options.get(OPT_JBDSTUDIO_CFG_FILE);
 		if(cfgFile!=null){
 			cfgFile = PROP_JBDSTUDIO_CFG_FILE;
 			try{
 				InputStream in = null;
 				if(cfgFile.toUpperCase().startsWith("CLASSPATH:")){
-					 in = JBDStudionConfiguration.class.getResourceAsStream("/" + cfgFile.substring(10));					
+					 in = JBDStudioConfiguration.class.getResourceAsStream("/" + cfgFile.substring(10));					
 				}else{
 					in = new FileInputStream(cfgFile);
 				}
@@ -67,7 +70,7 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 	}
 	
 	
-	public JBDStudionConfiguration()
+	public JBDStudioConfiguration()
 	{
 		mergeProperties(System.getProperties());
 	}
@@ -144,6 +147,18 @@ public class JBDStudionConfiguration extends HashMap<String, String> {
 
 		return sslContext;
 	}
+	
+	
+
+	public CLIOptions getOptions() {
+		return options;
+	}
+
+
+	public void setOptions(CLIOptions options) {
+		this.options = options;
+	}
+
 
 	/**
 	 * @param args

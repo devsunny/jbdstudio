@@ -21,7 +21,7 @@ public final class CLIOptions extends Hashtable<String, String> {
 	}
 
 	public int getIntOption(String optName) {
-		return Integer.valueOf(getOption(optName));
+		return (hashOption(optName))?Integer.valueOf(getOption(optName)):0;
 	}
 
 	public long getLongOption(String optName) {

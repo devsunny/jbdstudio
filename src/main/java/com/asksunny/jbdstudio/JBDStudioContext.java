@@ -17,7 +17,7 @@ public class JBDStudioContext extends HashMap<String, Object>
 	public final static String PLUGIN_DIR = "jbdstudio.plugin.dir";
 	
 	URLClassLoader pluginClassloader = null;
-	JBDStudionConfiguration configuration;
+	JBDStudioConfiguration configuration;
 	
 	
 	/**
@@ -27,16 +27,16 @@ public class JBDStudioContext extends HashMap<String, Object>
 	
 	public JBDStudioContext(CLIOptions options)
 	{
-		configuration = new JBDStudionConfiguration(options);
+		configuration = new JBDStudioConfiguration(options);
 		initPlugin();
 	}
 	
 
-	public JBDStudionConfiguration getConfiguration() {
+	public JBDStudioConfiguration getConfiguration() {
 		return configuration;
 	}
 
-	public void setConfiguration(JBDStudionConfiguration configuration) {
+	public void setConfiguration(JBDStudioConfiguration configuration) {
 		this.configuration = configuration;
 	}
 	
